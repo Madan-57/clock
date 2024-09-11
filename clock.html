@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <script src="script1.js"></script>
+    <main>
+        <section class="container">
+            <section class="numbers">
+                <span class="twelve">12</span>
+                <span class="three">3</span>
+                <span class="six">6</span>
+                <span class="nine">9</span>
+            </section>
+            <section class="needles">
+                <span class="dot"></span>
+                <span class="hoursneedle"></span>
+                <span class="minutesneedle"></span>
+                <span class="secondsneedle"></span>
+            </section>
+            <section class="digital">
+                <span class="digHours">18</span>
+                <span>:</span>
+                <span class="digMinutes">07</span>
+                <span>:</span>
+                <span class="digSeconds">34</span>
+            </section>
+            <section class="month">
+                <span id="date">3</span>
+                <span>:</span>
+                <span id="monthDate">mont</span>
+            </section >
+            <section class="year">
+                <span id="fullyear">year</span>
+            </section>
+            
+                
+        </section>
+    </main>
+</body>
+</html>
+
+
+<style.css>
+
+
+/* *::before, */ 
+/* *::after {
+  box-sizing: border-box;
+} */
+
+body{
+    background-image: url(https://media.istockphoto.com/id/1008108158/photo/retro-wooden-cabinet-and-a-painting-in-an-empty-living-room-interior-with-white-walls-and.jpg?s=612x612&w=0&k=20&c=vDG7xSaX62DfJ6khAulcHb657M-pA-tlzQcxmm3lpK0=);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 80%;
+    /* background-image: url(https://cdn.pixabay.com/photo/2018/03/04/09/51/space-3197611_640.jpg); */
+
+}
+.container{
+    height: 300px;
+    width: 300px;
+    background-color: rgb(227, 235, 233);
+    border-radius: 50%;
+    border: 3px solid black;
+    position: relative;
+    /* margin: 100px auto; */
+    margin-left: 40%;
+
+
+}
+.numbers > span{
+    position: absolute;
+}
+.numbers .twelve{
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+}
+.numbers .nine{
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}.numbers .six{
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.numbers .three{
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+.needles{
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+
+}.dot{
+    width: 6px;
+    height: 6px;
+    background-color: black;
+    border-radius: 50%;
+    /* z-index: 1; */
+}.hoursneedle{
+    height: 32px;
+    width: 2px;
+    border: 1px solid;
+
+    position: absolute;
+    bottom: 50%;
+    /* rotate: 20deg; */
+    transform-origin: bottom;
+
+
+}
+.minutesneedle{
+    height: 70px;
+    width: 2px;
+    color: rgb(192, 85, 192);
+    border: 1px solid;
+
+    position: absolute;
+    bottom: 50%;
+    /* rotate: 45deg; */
+    transform-origin: bottom;
+
+
+
+}.secondsneedle{
+    height: 94px;
+    width: 1.5px;
+
+    /* border: 1px solid; */
+    background-color: rgb(248, 149, 1);
+
+    position: absolute;
+    bottom: 50%;
+    transform-origin: bottom;
+
+
+}.digital{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top:50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: aliceblue;
+    width: 70px;
+    border-radius: 7px;
+    /* z-index: 1; */
+}
+.month{
+   position: relative;
+   left: 20%;
+   top: 70%;
+   width: 60px;
+   border-radius: 7px;
+   background-color: aliceblue;
+}
+.year{
+    position: relative;
+    left: 60%;
+    top: 64%;
+    width: 50px;
+    border-radius: 7px;
+    background-color: white;
+
+}
+
+
+
+
+  <script.js>
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded",function(){
+    const minsHand=document.querySelector(".minutesneedle");
+    const secondsHand=document.querySelector(".secondsneedle");
+    const hoursHand=document.querySelector(".hoursneedle");
+    const hoursInDigital=document.querySelector(".digHours");
+    const minInDigital=document.querySelector(".digMinutes");
+    const secInDigital=document.querySelector(".digSeconds");
+    const months=["jan","feb","mar","apr","may",
+            "june","july","Aug","sep","oct",
+            "nov" ,"dec"
+            ];
+            const today=new Date();
+            const monthofyear=today.getMonth()
+            const curryear=today.getFullYear()
+            const currdate=today.getDate()
+            document.getElementById("monthDate").innerText=months[monthofyear];
+            document.querySelector("#fullyear").textContent=curryear;
+            document.querySelector("#date").innerText=currdate;
+
+
+            
+
+
+    function setTime(){
+        const now=new Date();
+        const minutes=now.getMinutes();
+        const seconds=now.getSeconds();
+        const hours=now.getHours();
+        // console.log(hours)
+        const secindeg=(seconds/60)*360;
+        const minindeg=(minutes/60)*360;
+        const houindeg=(hours/12)*360;
+        minsHand.style.transform="rotate("+minindeg+"deg)";
+        secondsHand.style.transform="rotate("+secindeg+"deg)";
+        hoursHand.style.transform="rotate("+houindeg+"deg)";
+        hoursInDigital.textContent=hours;
+        minInDigital.textContent=minutes;
+        secInDigital.innerText=seconds;
+    }
+    setTime(); // Initial call to set the time immediately
+    setInterval(setTime, 1000); // Update the time every second
+}
+    
+)
+
+
